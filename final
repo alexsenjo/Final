@@ -150,9 +150,9 @@ for i = 7679:9202                               %2021
 end
 
 hold on
-plot(2012:2021, HeroinD/9202 * 100, 'r')
-plot(2012:2021, CocaineD/9202 * 100, 'b')
-plot(2012:2021, FentanylD/9202 * 100, 'g')
+plot(2012:2021, HeroinD./DeathsByYear * 100, 'r')
+plot(2012:2021, CocaineD./DeathsByYear * 100, 'b')
+plot(2012:2021, FentanylD./DeathsByYear * 100, 'g')
 
 title('Percentage of Deaths in which Substance Was Present')
 legend('Heroin','Cocaine','Fentanyl')
