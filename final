@@ -154,6 +154,6 @@ plot(2012:2021, HeroinD./DeathsByYear * 100, 'r')
 plot(2012:2021, CocaineD./DeathsByYear * 100, 'b')
 plot(2012:2021, FentanylD./DeathsByYear * 100, 'g')
 
-title('Percentage of Deaths in which Substance Was Present')
+title('Percentage of Deaths Per Year in which Substance Was Present in Person''s bloodstream')
 legend('Heroin','Cocaine','Fentanyl')
 
