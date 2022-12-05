@@ -7,7 +7,7 @@ dt = removevars(dt,{'DateType','Race','Ethnicity','ResidenceCity','ResidenceCoun
 dt = sortrows(dt);
 dt.InjuryCity = strtrim(string(dt.InjuryCity));
 
-DeathsByYear = [];
+DeathsByYear = zeros(1,10);
 
 HeroinD = zeros(1,10);
 CocaineD = zeros(1,10);
@@ -24,8 +24,8 @@ TramadD = [];
 XylazineD = [];
 GabapentinD = [];
 
-for i = 2012:2021
-    DeathsByYear(end + 1) = sum(year(dt.Date) == i);
+for i = 1:10
+    DeathsByYear(i) = sum(year(dt.Date) == (i+2011));
 end
 
 for i = 1:355                                   %2012
