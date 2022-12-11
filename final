@@ -198,15 +198,41 @@ plot(2012:2021, OtherD./DeathsByYear * 100, 'k')
 
 title('Percentage of Deaths Per Year in which Substance Was Present in Person''s bloodstream')
 legend('Heroin','Cocaine','Fentanyl', 'Other')
-
+xlabel('Year')
+ylabel('Percentage of Deaths')
+hold off
 
 total = [sum(strcmp(dt.Heroin,'Y')), sum(strcmp(dt.Cocaine,'Y')), sum(strcmp(dt.Fentanyl,'Y')), sum(strcmp(dt.Oxycodone,'Y')),...
     sum(strcmp(dt.Ethanol,'Y')), sum(strcmp(dt.Benzodiazepine,'Y')), sum(strcmp(dt.Methadone,'Y')) + sum(strcmp(dt.Meth_Amphetamine,'Y')) + ...
     sum(strcmp(dt.Amphet,'Y')) + sum(strcmp(dt.Tramad,'Y')) + sum(strcmp(dt.Xylazine,'Y')) + sum(strcmp(dt.Gabapentin,'Y'))];
-names = {'Heroin', 'Cocaine', 'Fentanyl', 'Oxycodone', 'Ethanol', 'Benzodiazepine', 'Other'};
+labels = {'Heroin', 'Cocaine', 'Fentanyl', 'Oxycodone', 'Ethanol', 'Benzodiazepine', 'Other'};
 
+hold on
 figure(2)
-pie(toal,names)
-title('Percentage of drug related deaths from 2012-2021')
 
 
+
+xPercent = total / sum(total) * 100;
+newLabels = [];
+for i=1:length(total)
+    newLabels = [newLabels {sprintf('%s (%.1f%%)', labels{i}, xPercent(i))}];     
+end
+pie(total, newLabels);
+
+title('Drug related deaths from 2012-2021')
+hold off
+
+
+
+hold on
+figure(3)
+cities = {'Hartford', 'Waterbury', 'New Haven', 'Bridgeport', 'New Britain', 'Bristol', 'Meriden',...
+    'Norwich', 'New London', 'Torrington'};
+deaths = [G.GroupCount(1:10)];
+
+deathpct = [deaths(1)/120576, deaths(2)/113811, deaths(3)/135081, deaths(4)/148333, deaths(5)/73841, ...
+    deaths(6)/60661, deaths(7)/60517, deaths(8)/40014, deaths(9)/27635, deaths(10)/35357] .* 100;
+
+barh(deathpct);
+yticklabels(cities)
+hold off
