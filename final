@@ -7,6 +7,9 @@ dt = removevars(dt,{'DateType','Race','Ethnicity','ResidenceCity','ResidenceCoun
 dt = sortrows(dt);
 dt.InjuryCity = categorical(dt.InjuryCity);
 
+G = groupsummary(dt,"InjuryCity");
+G = sortrows(G,2,'descend');
+
 DeathsByYear = zeros(1,10);
 
 HeroinD = zeros(1,10);
@@ -19,8 +22,7 @@ for i = 1:10
     DeathsByYear(i) = sum(year(dt.Date) == (i+2011));
 end
 
-G = groupsummary(dt,"InjuryCity");
-G = sortrows(G,2,'descend');
+
 
 for i = 1:height(dt)
     n = year(dt.Date(i));
@@ -199,7 +201,7 @@ plot(2012:2021, OtherD./DeathsByYear * 100, 'k')
 title('Percentage of Deaths Per Year in which Substance Was Present in Person''s bloodstream')
 legend('Heroin','Cocaine','Fentanyl', 'Other')
 xlabel('Year')
-ylabel('Percentage of Deaths')
+ylabel('Percent')
 hold off
 
 total = [sum(strcmp(dt.Heroin,'Y')), sum(strcmp(dt.Cocaine,'Y')), sum(strcmp(dt.Fentanyl,'Y')), sum(strcmp(dt.Oxycodone,'Y')),...
@@ -209,8 +211,6 @@ labels = {'Heroin', 'Cocaine', 'Fentanyl', 'Oxycodone', 'Ethanol', 'Benzodiazepi
 
 hold on
 figure(2)
-
-
 
 xPercent = total / sum(total) * 100;
 newLabels = [];
@@ -235,4 +235,11 @@ deathpct = [deaths(1)/120576, deaths(2)/113811, deaths(3)/135081, deaths(4)/1483
 
 barh(deathpct);
 yticklabels(cities)
+title('Percentage of city population who died of drug overdose')
+xlabel('Percent')
+ylabel('Town')
 hold off
+ 
+
+
+
